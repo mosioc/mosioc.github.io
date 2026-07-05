@@ -1,8 +1,9 @@
 ---
 company: "Diginoy"
 role: "Frontend Developer"
-dateStart: "06/01/2021"
-dateEnd: "12/01/2023"
+dateStart: "03/01/2023"
+dateEnd: "03/31/2024"
 ---
 
-Developed a storefront using JavaScript and a prototype real-time chat system using WebSocket. Developed a responsive web application using JavaScript, HTML5, and CSS3. Collaborated on front-end features, resolved approximately 500 major UI bugs, and ensured cross-browser compatibility. Gained foundational experience in DOM manipulation, ES6+ syntax, and CSS Flexbox/Grid.
+- Built storefront features in React 18/TypeScript and a real-time chat prototype with WebSocket; fixed roughly 500 UI bugs across browsers.
+- Built a reward and discount system (TailwindCSS, Zustand) with real-time promo code validation, plus a gamification/leveling system and paginated order history.
