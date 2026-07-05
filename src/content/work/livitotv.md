@@ -1,8 +1,9 @@
 ---
-company: "Livito TV"
+company: "Livito"
 role: "Frontend Developer"
-dateStart: "04/20/2022"
-dateEnd: "11/10/2022"
+dateStart: "06/01/2021"
+dateEnd: "02/28/2022"
 ---
 
-Experienced in building scalable React applications using TypeScript, Zustand for state management, and Vite for fast development workflows. Skilled in integrating REST APIs, optimizing performance, and maintaining clean, maintainable code.
+- Managed UI state for media feeds, chat overlays, and video players on a live-streaming platform (React 17, TypeScript), plus stream/streamer status tracking.
+- Built an A/B test varying displayed viewer counts and an approximated live-viewer counter; used React.lazy and fallback UI for disconnections and backend timeouts.
