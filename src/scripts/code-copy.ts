@@ -23,23 +23,49 @@ function addCodeCopyButtons() {
     status.setAttribute("aria-live", "polite");
     status.setAttribute("aria-atomic", "true");
 
+    let feedbackTimeout: number | undefined;
+    let announcementTimeout: number | undefined;
+    let latestCopyRequest = 0;
+
     button.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(code.textContent ?? "");
-        button.textContent = "Copied";
-        button.setAttribute("aria-label", "Code copied");
-        status.textContent = "Code copied to clipboard.";
-      } catch {
-        button.textContent = "Copy failed";
-        button.setAttribute("aria-label", "Copy failed");
-        status.textContent =
-          "Copy failed. Select the code and copy it manually.";
+      const copyRequest = ++latestCopyRequest;
+
+      if (feedbackTimeout !== undefined) {
+        window.clearTimeout(feedbackTimeout);
+      }
+      if (announcementTimeout !== undefined) {
+        window.clearTimeout(announcementTimeout);
       }
 
-      window.setTimeout(() => {
+      status.textContent = "";
+
+      let announcement: string;
+      let copied = false;
+      try {
+        await navigator.clipboard.writeText(code.textContent ?? "");
+        copied = true;
+        announcement = "Code copied to clipboard.";
+      } catch {
+        announcement = "Copy failed. Select the code and copy it manually.";
+      }
+
+      if (copyRequest !== latestCopyRequest) return;
+
+      button.textContent = copied ? "Copied" : "Copy failed";
+      button.setAttribute("aria-label", copied ? "Code copied" : "Copy failed");
+
+      announcementTimeout = window.setTimeout(() => {
+        if (copyRequest !== latestCopyRequest) return;
+        status.textContent = announcement;
+        announcementTimeout = undefined;
+      }, 0);
+
+      feedbackTimeout = window.setTimeout(() => {
+        if (copyRequest !== latestCopyRequest) return;
         button.textContent = "Copy";
         button.setAttribute("aria-label", "Copy code");
         status.textContent = "";
+        feedbackTimeout = undefined;
       }, 2000);
     });
 
